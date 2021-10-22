@@ -4,6 +4,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { ProductsModule } from './products/products.module';
+import { CatalogsModule } from './catalogs/catalogs.module';
+import { CategoriesModule } from './categories/categories.module';
 
 @Module({
   imports: [
@@ -20,6 +23,9 @@ import { AppService } from './app.service';
       autoLoadEntities: true,
       entities: [`${__dirname}/**/*.entity{.ts,.js}`],
     }),
+    ProductsModule,
+    CatalogsModule,
+    CategoriesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
