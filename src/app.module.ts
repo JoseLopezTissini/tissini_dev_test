@@ -7,6 +7,8 @@ import { AppService } from './app.service';
 import { ProductsModule } from './products/products.module';
 import { CatalogsModule } from './catalogs/catalogs.module';
 import { CategoriesModule } from './categories/categories.module';
+import { ProductVariantsModule } from './product-variants/product-variants.module';
+import { ProductVariantQuantitiesModule } from './product-variant-quantities/product-variant-quantities.module';
 
 @Module({
   imports: [
@@ -26,6 +28,8 @@ import { CategoriesModule } from './categories/categories.module';
     ProductsModule,
     CatalogsModule,
     CategoriesModule,
+    ProductVariantsModule,
+    ProductVariantQuantitiesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
