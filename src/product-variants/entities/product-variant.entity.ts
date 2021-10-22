@@ -1,7 +1,11 @@
+import { ProductVariantQuantity } from 'src/product-variant-quantities/entities/product-variant-quantity.entity';
+import { Product } from 'src/products/entities/product.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  ManyToOne,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -34,6 +38,12 @@ export class ProductVariant {
 
   @Column({ type: 'varchar' })
   custItemTjCategory: string;
+
+  @OneToOne(() => ProductVariantQuantity, (quantity) => quantity.productVariant)
+  variantQuantity: ProductVariantQuantity;
+
+  @ManyToOne(() => Product, (product) => product.variants)
+  product: Product;
 
   @CreateDateColumn({
     type: 'timestamp',

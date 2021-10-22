@@ -1,3 +1,4 @@
+import { Product } from 'src/products/entities/product.entity';
 import {
   Column,
   CreateDateColumn,
@@ -21,12 +22,6 @@ export class Category {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => Category, (category) => category.subcategories)
-  parent: Category;
-
-  @OneToMany(() => Category, (category) => category.parent)
-  subcategories: Category[];
-
   @Column({ type: 'varchar', length: '255' })
   name: string;
 
@@ -48,6 +43,15 @@ export class Category {
 
   @Column({ type: 'varchar' })
   slug: string;
+
+  @OneToMany(() => Category, (category) => category.parent)
+  subcategories: Category[];
+
+  @ManyToOne(() => Category, (category) => category.subcategories)
+  parent: Category;
+
+  @OneToMany(() => Product, (product) => product.category)
+  products: Product[];
 
   @CreateDateColumn({
     type: 'timestamp',

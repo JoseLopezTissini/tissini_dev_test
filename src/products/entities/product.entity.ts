@@ -1,7 +1,12 @@
+import { Catalog } from 'src/catalogs/entities/catalog.entity';
+import { Category } from 'src/categories/entities/category.entity';
+import { ProductVariant } from 'src/product-variants/entities/product-variant.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -54,6 +59,15 @@ export class Product {
 
   @Column({ type: 'varchar' })
   slug: string;
+
+  @OneToMany(() => ProductVariant, (variant) => variant.product)
+  variants: ProductVariant[];
+
+  @ManyToOne(() => Catalog, (catalog) => catalog.products)
+  catalog: Catalog;
+
+  @ManyToOne(() => Category, (category) => category.products)
+  category: Category[];
 
   @CreateDateColumn({
     type: 'timestamp',

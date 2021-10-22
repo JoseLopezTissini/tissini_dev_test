@@ -1,9 +1,24 @@
-import { Column, CreateDateColumn, Entity, UpdateDateColumn } from 'typeorm';
+import { ProductVariant } from 'src/product-variants/entities/product-variant.entity';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  OneToOne,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity()
 export class ProductVariantQuantity {
   @Column({ type: 'int' })
   quantity: number;
+
+  @OneToOne(
+    () => ProductVariant,
+    (productVariant) => productVariant.variantQuantity,
+  )
+  @JoinColumn({ name: 'product_variant_id' })
+  productVariant: ProductVariant;
 
   @CreateDateColumn({
     type: 'timestamp',

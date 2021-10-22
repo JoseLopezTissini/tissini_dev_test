@@ -1,7 +1,9 @@
+import { Product } from 'src/products/entities/product.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -19,6 +21,9 @@ export class Catalog {
 
   @Column({ type: 'int', length: '10', unsigned: true, nullable: true })
   year: number;
+
+  @OneToMany(() => Product, (product) => product.catalog)
+  products: Product[];
 
   @CreateDateColumn({
     type: 'timestamp',
